@@ -1,0 +1,90 @@
+/* General Page Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Employee Grid View */
+  .employee-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+  }
+  
+  /* Individual Employee Card */
+  .employee-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    max-width: 320px;
+  }
+  
+  .employee-card:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Employee Details */
+  .employee-detail {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .employee-detail h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Styling */
+  .employee-form {
+    display: grid;
+    gap: 15px;
+    padding: 20px;
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .employee-form label {
+    font-weight: bold;
+  }
+  
+  .employee-form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .employee-form button {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .employee-form button:hover {
+    background: #0056b3;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .employee-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  

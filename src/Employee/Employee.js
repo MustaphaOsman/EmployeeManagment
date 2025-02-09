@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./Employee.css";
 const Employee = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate(); // Initialize navigate
 
   useEffect(() => {
     axios
@@ -29,17 +31,23 @@ const Employee = () => {
     return <div>{error}</div>;
   }
 
+  const handleCardClick = (id) => {
+    navigate(`/employee/${id}`);  // Navigate to update page with employee ID
+  };
+
   return (
     <div>
-      <h1>Employee View</h1>
+      <h1>Employees Multi-View</h1>
       <div className="entity-list">
         {data.map((entity) => (
-          <div key={entity.id} className="entity-card">
+          
+          <div
+          key={entity.id}
+          className="entity-card"
+          onClick={() => handleCardClick(entity.id)} // Make card clickable
+        >
             <div className="entity-item">
               <strong>Name:</strong> {entity.name}
-            </div>
-            <div className="entity-item">
-              <strong>ID:</strong> {entity.id}
             </div>
             <div className="entity-item">
               <strong>Email:</strong> {entity.email}
