@@ -1,12 +1,17 @@
 import React from "react";
-import YourEntityList from "./YourEntityList"; // Adjust path if necessary
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Employee from "./Employee/Employee";
+import Navbar from "./NavBar/NavBar";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <YourEntityList />
-    </div>
+    <Router>
+           <Navbar />
+      <Routes>
+        <Route path="/employee" element={<Employee />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
