@@ -5,12 +5,40 @@ body {
   margin: 0;
   padding: 0;
 }
-
-h1 {
+.center-title {
   text-align: center;
-  font-size: 2rem;
   margin-top: 20px;
   color: #333;
+}
+
+/* Filter Section Styles */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.filters input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 180px;
+  font-size: 14px;
+  color: #555;
+}
+
+.filters input[type="number"], 
+.filters input[type="text"], 
+.filters input[type="date"] {
+  transition: border-color 0.2s ease;
+}
+
+.filters input:focus {
+  border-color: #007bff;
+  outline: none;
 }
 
 /* Entity List */
@@ -65,8 +93,41 @@ h1 {
 .entity-link:hover {
   color: #0056b3;
 }
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
 
-/* Media Queries for Responsive Design */
+.pagination button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  transition: background-color 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.pagination button:disabled {
+  background-color: #f4f4f9;
+  cursor: not-allowed;
+}
+
+.pagination .active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
   .entity-list {
     justify-content: flex-start;
@@ -75,6 +136,10 @@ h1 {
 
   .entity-card {
     width: 250px;
+  }
+
+  .filters input {
+    width: 160px;
   }
 }
 
@@ -87,5 +152,9 @@ h1 {
   .entity-card {
     width: 100%;
     max-width: 400px;
+  }
+
+  .filters input {
+    width: 100%;
   }
 }

@@ -17,6 +17,9 @@ const Navbar = () => {
         <li className="navbar-item">
           <Link to="/employee" className="navbar-link">View/Edit Employees  </Link> 
         </li>
+        <li className="navbar-item">
+          <Link to="/time" className="navbar-link">Add Time Shift</Link> 
+        </li>
       </ul>
     </nav>
   );

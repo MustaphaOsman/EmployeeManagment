@@ -98,8 +98,10 @@ const handleSubmit = (e) => {
     />
     
     <button 
+   
       type="button" 
-      onClick={() => setEmployee({ ...employee, endDate: null })}  // Set endDate to null on button click
+      onClick={() => setEmployee({ ...employee, endDate: null })} 
+      className="remove" // Set endDate to null on button click
     >
       Remove End Date
     </button>

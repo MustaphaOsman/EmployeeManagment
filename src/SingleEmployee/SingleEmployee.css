@@ -80,6 +80,11 @@ body {
   .employee-form button:hover {
     background: #0056b3;
   }
+
+  .remove{
+   background-color: rgba(167, 22, 22, 0.664) !important;
+    
+  }
   
   /* Responsive */
   @media (max-width: 768px) {
