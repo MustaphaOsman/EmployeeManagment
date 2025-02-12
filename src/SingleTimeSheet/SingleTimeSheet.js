@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"; 
 import axios from "axios";
 import "../SingleTimeSheet/SingleTimeSheet.css";
 
 const Timesheet = () => {
-  const [employees, setEmployees] = useState([]); // To store employee data
-  const [selectedEmployee, setSelectedEmployee] = useState(""); // To track selected employee
-  const [startTime, setStartTime] = useState(""); // To track start time
-  const [endTime, setEndTime] = useState(""); // To track end time
-  const [error, setError] = useState(""); // For error handling
-  const [successMessage, setSuccessMessage] = useState(""); // For successful form submission
-
+  const [employees, setEmployees] = useState([]); // Store employee data
+  const [selectedEmployee, setSelectedEmployee] = useState(""); // Selected employee
+  const [startTime, setStartTime] = useState(""); // Start time
+  const [endTime, setEndTime] = useState(""); // End time
+  const [workSummary, setWorkSummary] = useState(""); // Work summary
+  const [error, setError] = useState(""); // Error handling
+  const [successMessage, setSuccessMessage] = useState(""); // Success message
 
   useEffect(() => {
     // Fetch employee data for the dropdown
@@ -25,25 +25,42 @@ const Timesheet = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     // Validate the form
-    if (!selectedEmployee || !startTime || !endTime) {
+    if (!selectedEmployee || !startTime || !endTime || !workSummary) {
       setError("Please fill in all fields.");
       return;
     }
-
+  
+    // Convert startTime and endTime to Date objects for comparison
+    const startDate = new Date(startTime);
+    const endDate = new Date(endTime);
+  
+    // Check if endTime is after startTime
+    if (endDate <= startDate) {
+      setError("End time must be later than start time.");
+      return;
+    }
+  
     const timeSheetData = {
       employeeId: selectedEmployee,
-      startTime: new Date(startTime).toISOString(),
-      endTime: new Date(endTime).toISOString(),
+      startTime: startDate.toISOString(),
+      endTime: endDate.toISOString(),
+      workSummary: workSummary, // Include work summary
     };
-
-    // Post the form data to an API endpoint (assuming you have an API to handle it)
+  
+    console.log("Timesheet Data:", timeSheetData);
+  
+    // Submit the form data to the API
     axios
-      .post("https://localhost:7255/api/Timesheet", timeSheetData)
+      .post("https://localhost:7255/api/Timesheet/new", timeSheetData)
       .then((response) => {
         setSuccessMessage("Timesheet submitted successfully!");
         setError(""); // Clear error on success
+        setSelectedEmployee("");
+        setStartTime("");
+        setEndTime("");
+        setWorkSummary(""); // Reset work summary
       })
       .catch((error) => {
         setError("Error submitting timesheet: " + error.message);
@@ -51,8 +68,8 @@ const Timesheet = () => {
   };
 
   return (
-    <div>
-      <h1>Timesheet Form</h1>
+    <div className="timesheet-container">
+      <h1>Add Timesheet for Employee</h1>
 
       {/* Display error or success messages */}
       {error && <div className="error">{error}</div>}
@@ -93,6 +110,18 @@ const Timesheet = () => {
             id="endTime"
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
+          />
+        </div>
+
+        {/* New Work Summary Field */}
+        <div className="form-group">
+          <label htmlFor="workSummary">Work Summary:</label>
+          <textarea
+            id="workSummary"
+            rows="3"
+            value={workSummary}
+            onChange={(e) => setWorkSummary(e.target.value)}
+            placeholder="Describe the work done..."
           />
         </div>
 

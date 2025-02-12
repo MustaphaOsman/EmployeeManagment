@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Employee from "./Employee/Employee";
 import SingleEmployee from "./SingleEmployee/SingleEmployee.js";
 import Timesheet from "./SingleTimeSheet/SingleTimeSheet.js";
+import ScheduelSheet from "./ScheduelSheet/Scheduel.js";
 import Navbar from "./NavBar/NavBar";
 
 const App = () => {
@@ -15,6 +16,8 @@ const App = () => {
         <Route path="/employee/:id" element={<SingleEmployee />} />
 
         <Route path="/time" element={<Timesheet />} />
+
+        <Route path="/sctime" element={<ScheduelSheet />} />
 
       </Routes>
     </Router>

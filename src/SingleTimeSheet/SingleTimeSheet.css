@@ -1,33 +1,96 @@
+/* General Page Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  
+}
+
+/* Timesheet Form Container */
+.timesheet-container {
+  display: grid;
+  gap: 15px;
+  padding: 20px;
+  max-width: 500px;
+   height: 100%;
+  margin: auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ 
+}
+
+/* Form Title */
+.timesheet-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Form Fields */
+.timesheet-container label {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.timesheet-container select,
+.timesheet-container input,
+.timesheet-container textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+}
+
+/* Textarea */
+.timesheet-container textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Submit Button */
+.timesheet-container button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.timesheet-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Success Message */
+.success {
+  color: #28a745;
+  background-color: rgba(40, 167, 69, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* Error Message */
 .error {
-    color: red;
-    font-weight: bold;
+  color: #ff4d4d;
+  background-color: rgba(255, 77, 77, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .timesheet-container {
+      padding: 15px;
+      margin-top: 30px;
+      max-width: 100%;
   }
-  
-  .success {
-    color: green;
-    font-weight: bold;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
+}

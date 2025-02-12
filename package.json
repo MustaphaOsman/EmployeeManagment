@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@schedule-x/events-service": "^2.18.0",
+    "@schedule-x/react": "^2.18.0",
+    "@schedule-x/theme-default": "^2.18.0",
     "axios": "^1.7.9",
     "cra-template": "1.2.0",
     "express": "^4.21.2",
