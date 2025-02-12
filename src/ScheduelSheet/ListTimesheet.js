@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Employee.css";
+import "../ScheduelSheet/Scheduel.css";
 
-const Employee = () => {
+const TimesheetList = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [minSalary, setMinSalary] = useState("");
-  const [maxSalary, setMaxSalary] = useState("");
+  const [employeeName, setEmployeeName] = useState("");
   const [startDateMin, setStartDateMin] = useState("");
   const [startDateMax, setStartDateMax] = useState("");
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(15);
+  const [itemsPerPage] = useState(10);
 
   // Sorting state
   const [sortField, setSortField] = useState("");
@@ -26,7 +24,7 @@ const Employee = () => {
 
   useEffect(() => {
     axios
-      .get("https://localhost:7255/api/Employee")
+      .get("https://localhost:7255/api/Timesheet")
       .then((response) => {
         setData(response.data);
         setFilteredData(response.data);
@@ -40,30 +38,26 @@ const Employee = () => {
 
   // Handle filtering
   useEffect(() => {
-    let filtered = data.filter((employee) =>
-      employee.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    let filtered = data;
 
-    if (minSalary) {
-      filtered = filtered.filter((employee) => employee.salary >= parseFloat(minSalary));
-    }
-
-    if (maxSalary) {
-      filtered = filtered.filter((employee) => employee.salary <= parseFloat(maxSalary));
+    if (employeeName) {
+      filtered = filtered.filter((item) =>
+        item.employeeName.toLowerCase().includes(employeeName.toLowerCase())
+      );
     }
 
     if (startDateMin) {
       const minDate = new Date(startDateMin);
-      filtered = filtered.filter((employee) => new Date(employee.startDate) >= minDate);
+      filtered = filtered.filter((item) => new Date(item.startTime) >= minDate);
     }
 
     if (startDateMax) {
       const maxDate = new Date(startDateMax);
-      filtered = filtered.filter((employee) => new Date(employee.startDate) <= maxDate);
+      filtered = filtered.filter((item) => new Date(item.startTime) <= maxDate);
     }
 
     setFilteredData(filtered);
-  }, [searchTerm, minSalary, maxSalary, startDateMin, startDateMax, data]);
+  }, [employeeName, startDateMin, startDateMax, data]);
 
   // Handle sorting
   const handleSort = (field) => {
@@ -101,35 +95,23 @@ const Employee = () => {
   }
 
   const handleRowClick = (id) => {
-    navigate(`/employee/${id}`);
+    navigate(`/timesheet/${id}`);
   };
 
   return (
     <div>
       <div className="center-title">
-        <h1>Employees List View</h1>
-        <p>Click on a row to edit employee details</p>
+        <h1>Employee Timesheets</h1>
+        <p>Click on a row to view timesheet details</p>
       </div>
 
       {/* Search and Filter Inputs */}
       <div className="filters">
         <input
           type="text"
-          placeholder="Search by name..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Min Salary"
-          value={minSalary}
-          onChange={(e) => setMinSalary(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Max Salary"
-          value={maxSalary}
-          onChange={(e) => setMaxSalary(e.target.value)}
+          placeholder="Filter by Employee Name"
+          value={employeeName}
+          onChange={(e) => setEmployeeName(e.target.value)}
         />
         <input
           type="date"
@@ -145,25 +127,29 @@ const Employee = () => {
         />
       </div>
 
-      {/* Employee Table */}
-      <table className="employee-table">
+      {/* Timesheet Table */}
+      <table className="timesheet-table">
         <thead>
           <tr>
-            <th onClick={() => handleSort("name")}>Name {sortField === "name" ? (sortOrder === "asc" ? "▲" : "▼") : ""}</th>
-            <th>Email</th>
-            <th onClick={() => handleSort("jobTitle")}>Job Title {sortField === "jobTitle" ? (sortOrder === "asc" ? "▲" : "▼") : ""}</th>
-            <th onClick={() => handleSort("salary")}>Salary {sortField === "salary" ? (sortOrder === "asc" ? "▲" : "▼") : ""}</th>
-            <th onClick={() => handleSort("startDate")}>Start Date {sortField === "startDate" ? (sortOrder === "asc" ? "▲" : "▼") : ""}</th>
+            <th onClick={() => handleSort("employeeName")}>
+              Employee Name {sortField === "employeeName" ? (sortOrder === "asc" ? "▲" : "▼") : ""}
+            </th>
+            <th onClick={() => handleSort("startTime")}>
+              Start Time {sortField === "startTime" ? (sortOrder === "asc" ? "▲" : "▼") : ""}
+            </th>
+            <th onClick={() => handleSort("endTime")}>
+              End Time {sortField === "endTime" ? (sortOrder === "asc" ? "▲" : "▼") : ""}
+            </th>
+            <th>Work Summary</th>
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((employee) => (
-            <tr key={employee.id} onClick={() => handleRowClick(employee.id)}>
-              <td>{employee.name}</td>
-              <td>{employee.email}</td>
-              <td>{employee.jobTitle}</td>
-              <td>${employee.salary}</td>
-              <td>{new Date(employee.startDate).toLocaleDateString()}</td>
+          {currentItems.map((item) => (
+            <tr key={item.id} onClick={() => handleRowClick(item.id)}>
+              <td>{item.employeeName}</td>
+              <td>{new Date(item.startTime).toLocaleString()}</td>
+              <td>{new Date(item.endTime).toLocaleString()}</td>
+              <td>{item.workSummary}</td>
             </tr>
           ))}
         </tbody>
@@ -191,4 +177,4 @@ const Employee = () => {
   );
 };
 
-export default Employee;
+export default TimesheetList;

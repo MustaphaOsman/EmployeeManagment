@@ -20,6 +20,10 @@ const Navbar = () => {
         <li className="navbar-item">
           <Link to="/time" className="navbar-link">Add Time Shift</Link> 
         </li>
+
+        <li className="navbar-item">
+          <Link to="/sctime" className="navbar-link">TimeSheet/Scheduel</Link> 
+        </li>
       </ul>
     </nav>
   );
