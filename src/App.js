@@ -4,7 +4,9 @@ import Employee from "./Employee/Employee";
 import SingleEmployee from "./SingleEmployee/SingleEmployee.js";
 import Timesheet from "./SingleTimeSheet/SingleTimeSheet.js";
 import Navbar from "./NavBar/NavBar";
+import TimesheetUpdateForm from "./ScheduelSheet/UpdateTime.js";
 import SchedulerToggle from "./ScheduelSheet/SchedulerToggle .js";
+import Home from "./Home.js";
 
 const App = () => {
   return (
@@ -18,6 +20,11 @@ const App = () => {
         <Route path="/time" element={<Timesheet />} />
 
         <Route path="/sctime" element={<SchedulerToggle />} />
+
+        <Route path="/timesheet/:id" element={<TimesheetUpdateForm />} />
+
+        <Route path="/" element={<Home />} />
+        
 
       </Routes>
     </Router>

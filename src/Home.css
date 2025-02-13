@@ -1,0 +1,39 @@
+.home-container {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+  }
+  
+  .btn {
+    margin: 1rem;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  
